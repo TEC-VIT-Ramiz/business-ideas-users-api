@@ -32,6 +32,16 @@ const userSchema = new mongoose.Schema({
             }
         }
     },
+    currentAnswer: {
+        type: Number,
+        default: 1,
+        required: true
+    },
+    score: {
+        type: Number,
+        default: 0,
+        required: true
+    },
     company: {
         type: String,
         required: true
