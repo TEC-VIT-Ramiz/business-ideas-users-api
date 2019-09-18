@@ -34,6 +34,44 @@ router.post("/users/login", async (req, res) => {
     }
 });
 
+router.patch('/users/me', auth, async (req, res) => {
+    const updates = Object.keys(req.body);
+    const allowedUpdates = ["score", "currentQuestion", "company"];
+    const isValidOperation = updates.every(update =>
+        allowedUpdates.includes(update)
+    );
+
+    if (!isValidOperation) {
+        return res.status(400).send({
+            error: "Invalid updates!"
+        });
+    }
+    
+    try {
+        updates.forEach(update => {
+            if(update === "company") {
+                if(req.user["company"] !== "") {
+                    return res.send({
+                        error: "Company already chosen."
+                    })
+                }
+            }
+            else {
+                if(update === "score") {
+                    req.user[update] += req.body[update]
+                }
+                else {
+                    req.user[update] = req.body[update]
+                }
+            }
+        });
+        await req.user.save();
+        res.send(req.user);
+    } catch (e) {
+        res.status(400).send(e);
+    }
+})
+
 router.post("/users/logout", auth, async (req, res) => {
     try {
         req.user.tokens = req.user.tokens.filter(token => {

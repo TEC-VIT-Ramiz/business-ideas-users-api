@@ -32,7 +32,7 @@ const userSchema = new mongoose.Schema({
             }
         }
     },
-    currentAnswer: {
+    currentQuestion: {
         type: Number,
         default: 1,
         required: true
@@ -44,7 +44,7 @@ const userSchema = new mongoose.Schema({
     },
     company: {
         type: String,
-        required: true
+        default: ""
     },
     tokens: [{
         token: {
