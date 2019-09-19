@@ -48,22 +48,17 @@ router.patch('/users/me', auth, async (req, res) => {
     }
     
     try {
+        // console.log(update)
         updates.forEach(update => {
-            if(update === "company") {
-                if(req.user["company"] !== "") {
-                    return res.send({
-                        error: "Company already chosen."
-                    })
-                }
-            }
-            else {
+            
+             
                 if(update === "score") {
                     req.user[update] += req.body[update]
                 }
                 else {
                     req.user[update] = req.body[update]
                 }
-            }
+            
         });
         await req.user.save();
         res.send(req.user);
