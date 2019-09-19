@@ -22,4 +22,27 @@ const auth = async (req, res, next) => {
     }
 }
 
-module.exports = auth
+const validateUser = async (req, res, next) => {
+    //get token
+    let decoded = jwt.verify(req.header('Authorization'), process.env.JWT_SECRET)
+    
+    //check if the user exists
+    const user =  await User.findOne({
+        _id: decoded._id,
+        'tokens.token': req.header('Authorization')
+    })
+    if(!user) {
+        return {
+            error: "User not created"
+        }
+    }
+    //save it to req variable 
+    req.authToken = decoded
+    //next()
+    next()
+}
+
+module.exports = { 
+    auth,
+    validateUser
+}

@@ -14,11 +14,13 @@ router.post("/users", async (req, res) => {
             token
         });
     } catch (e) {
-        res.status(400).send(e);
+        res.status(400).send({
+            "error": "User not created"
+        });
     }
 });
 
-router.post("/users/login", async (req, res) => {
+router.post("/users/login", auth.validateUser, async (req, res) => {
     try {
         const user = await User.findByCredentials(
             req.body.email,
@@ -34,7 +36,7 @@ router.post("/users/login", async (req, res) => {
     }
 });
 
-router.patch('/users/me', auth, async (req, res) => {
+router.patch('/users/me', auth.auth, async (req, res) => {
     const updates = Object.keys(req.body);
     const allowedUpdates = ["score", "currentQuestion", "company"];
     const isValidOperation = updates.every(update =>
@@ -74,7 +76,7 @@ router.patch('/users/me', auth, async (req, res) => {
     }
 })
 
-router.post("/users/logout", auth, async (req, res) => {
+router.post("/users/logout", auth.auth, async (req, res) => {
     try {
         req.user.tokens = req.user.tokens.filter(token => {
             return token.token !== req.token;
@@ -87,7 +89,7 @@ router.post("/users/logout", auth, async (req, res) => {
     }
 });
 
-router.get("/users/me", auth, async (req, res) => {
+router.get("/users/me", auth.auth, async (req, res) => {
     res.send(req.user);
 });
 
