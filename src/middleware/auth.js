@@ -23,22 +23,31 @@ const auth = async (req, res, next) => {
 }
 
 const validateUser = async (req, res, next) => {
+    // const token = req.header('Authorization').replace('Bearer ', '')
+    // const decoded = jwt.verify(token, process.env.JWT_SECRET)
     //get token
-    let decoded = jwt.verify(req.header('Authorization'), process.env.JWT_SECRET)
+    // let decoded = jwt.verify(req.header('Authorization'), process.env.JWT_SECRET)
+    // console.log(decoded)
     
-    //check if the user exists
-    const user =  await User.findOne({
-        _id: decoded._id,
-        'tokens.token': req.header('Authorization')
-    })
-    if(!user) {
-        return {
-            error: "User not created"
-        }
-    }
-    //save it to req variable 
-    req.authToken = decoded
+    // //check if the user exists
+    // const user =  await User.findOne({
+    //     _id: decoded._id,
+    //     'tokens.token': req.header('Authorization')
+    // })
+    // if(!user) {
+    //     return {
+    //         error: "User not created"
+    //     }
+    // }
+    // //save it to req variable 
+    // req.authToken = decoded
     //next()
+
+    const token = req.headers.authorization
+    // const decoded = jwt.verify(token, process.env.JWT_SECRET)
+    console.log(token)
+    // console.log(decoded)
+
     next()
 }
 

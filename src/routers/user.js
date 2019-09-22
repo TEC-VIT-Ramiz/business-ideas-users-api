@@ -3,7 +3,7 @@ const User = require("../models/user");
 const auth = require("../middleware/auth");
 const router = new express.Router();
 
-router.post("/users", async (req, res) => {
+router.post("/users", auth.validateUser, async (req, res) => {
     const user = new User(req.body);
 
     try {
@@ -20,7 +20,7 @@ router.post("/users", async (req, res) => {
     }
 });
 
-router.post("/users/login", async (req, res) => {
+router.post("/users/login", auth.validateUser, async (req, res) => {
     try {
         const user = await User.findByCredentials(
             req.body.email,
