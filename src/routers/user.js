@@ -50,7 +50,6 @@ router.patch('/users/me', auth.auth, async (req, res) => {
     }
     
     try {
-        // console.log(update)
         updates.forEach(update => {
             if(update == "company") {
                 if(!req.user.company) {

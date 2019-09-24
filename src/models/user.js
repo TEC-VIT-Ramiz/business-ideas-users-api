@@ -32,7 +32,22 @@ const userSchema = new mongoose.Schema({
         default: 1,
         required: true
     },
-    score: {
+    scoreFinance: {
+        type: Number,
+        default: 0,
+        required: true
+    },
+    scoreSales: {
+        type: Number,
+        default: 0,
+        required: true
+    },
+    scoreProduction: {
+        type: Number,
+        default: 0,
+        required: true
+    },
+    scoreRnD: {
         type: Number,
         default: 0,
         required: true
