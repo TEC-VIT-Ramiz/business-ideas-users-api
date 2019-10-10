@@ -32,6 +32,14 @@ const userSchema = new mongoose.Schema({
         default: 1,
         required: true
     },
+    pair: {
+        type: String,
+        default: ""
+    },
+    flag: {
+        type: String,
+        default: ""
+    },
     scoreFinance: {
         type: Number,
         default: 0

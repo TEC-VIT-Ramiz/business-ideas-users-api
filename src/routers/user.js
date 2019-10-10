@@ -38,7 +38,7 @@ router.post("/users/login", auth.validateUser, async (req, res) => {
 
 router.patch('/users/me', auth.auth, async (req, res) => {
     const updates = Object.keys(req.body);
-    const allowedUpdates = ["scoreRnd", "scoreSales", "scoreProduction", "scoreFinance", "currentQuestion", "company"];
+    const allowedUpdates = ["flag", "pair","scoreRnd", "scoreSales", "scoreProduction", "scoreFinance", "currentQuestion", "company"];
     const isValidOperation = updates.every(update =>
         allowedUpdates.includes(update)
     );
