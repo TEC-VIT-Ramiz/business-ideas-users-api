@@ -40,6 +40,22 @@ const userSchema = new mongoose.Schema({
         type: String,
         default: ""
     },
+    trivsal: {
+        type: String,
+        default: ""
+    },
+    trivfin: {
+        type: String,
+        default: ""
+    },
+    trivpro: {
+        type: String,
+        default: ""
+    },
+    trivrnd: {
+        type: String,
+        default: ""
+    },
     scoreFinance: {
         type: Number,
         default: 0
