@@ -60,7 +60,7 @@ router.patch('/users/me', auth.auth, async (req, res) => {
                     })
                 }
             } else {
-                if(update.includes("score")) {
+                if(update.includes("score") || update === "counter") {
                     req.user[update] += req.body[update]
                 }
                 else {
