@@ -40,6 +40,14 @@ const userSchema = new mongoose.Schema({
         type: String,
         default: ""
     },
+    flag2: {
+        type: String,
+        default: ""
+    },
+    counter: {
+        type: Number,
+        default: 0
+    },
     trivsal: {
         type: String,
         default: ""
