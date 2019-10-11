@@ -50,19 +50,19 @@ const userSchema = new mongoose.Schema({
     },
     weightSal: {
         type: Number,
-        default: 0
+        default: 0.0
     },
     weightPro: {
         type: Number,
-        default: 0
+        default: 0.0
     },
     weightRes: {
         type: Number,
-        default: 0
+        default: 0.0
     },
     weightFin: {
         type: Number,
-        default: 0
+        default: 0.0
     },
     trivsal: {
         type: String,
